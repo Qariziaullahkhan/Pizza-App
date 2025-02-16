@@ -1,0 +1,46 @@
+class Constants {
+  static const String appName = 'Pizza App';
+  static const String appVersion = '1.0.0';
+  static const String account = "Create your Account";
+  static const String flavour = "Create Your Flavor Journey, One Tap Away!";
+  static const String enteredemail = "Please enter your email to reset the password";
+  static const String signininto = "Sign in to your Account";
+  static const String mobilepassword = "Enter your mobile number and password to login ";
+  static const String already = "Do you have already account?";
+  static const String dont = "Don’t have an account?";
+  static const String register = "Register";
+  static const String login = "Log In";
+  static const String signin = "Sign In";
+  static const String mobile = "Mobile Number";
+  static const String singup = "Sign Up";
+  static const String email = "Email";
+  static const String password = "Password";
+  static const String forget = "Forget Password?";
+  static const String forgot = "Forgot Password";
+  static const String verfication = "Get Verification code";
+  static const String digitcode = "We sent a 6 digit code of your register email";
+  static const String emailverify = "Check your email";
+  static const String verify = "Verify Code";
+  static const String resend = "Haven’t got the email yet? ";
+  static const String resendemial = "Resend email";
+  static const String setnew = "Set a new password";
+  static const String createnew = "Create a new password. Ensure it differs from previous ones for security";
+  static const String resetpassword ="Reset password";
+  static const String reset = "Reset password";
+  static const String passwrordresset = "Your password has been reset  successfully!";
+  static const String done = "Done";
+  static const String pizaa = "Pizza";
+  static const String addressLine = "579, Air Line Society";
+  static const String delivery = "Delivery to";
+  static const String searchproducts = "Search Products";
+  static const String yourcart = "Your Cart";  
+  static const String home = "Home";
+  static const String address = "Address";
+  static const String profile = "Profile";
+  static const String cart = "Cart";
+  static const String favourits = "Favourits";
+  static const String notifications = "Notifications";
+  static const String  allorders = "All Orders";
+  static const String edit = "Edit Profile";
+
+}
