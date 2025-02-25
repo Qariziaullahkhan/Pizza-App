@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pizza_app/views/address/address_view.dart';
 import 'package:pizza_app/views/favrourite/favourite.dart';
-import 'package:pizza_app/views/home/dashboard_view.dart';
+import 'package:pizza_app/views/dashboard/dashboard_view.dart';
 import 'package:pizza_app/views/order/order_view.dart';
 import 'package:pizza_app/views/profile/profile.dart';
 

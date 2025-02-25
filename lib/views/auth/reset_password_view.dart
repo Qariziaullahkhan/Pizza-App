@@ -3,11 +3,10 @@ import 'package:get/get.dart';
 import 'package:pizza_app/utils/colors.dart';
 import 'package:pizza_app/utils/constants.dart';
 import 'package:pizza_app/utils/responsive.dart';
-import 'package:pizza_app/views/auth/done_view.dart';
 import 'package:pizza_app/widgets/my_size.dart';
 import 'package:pizza_app/widgets/mybutton.dart';
 import 'package:pizza_app/widgets/mytext.dart';
-import 'package:pizza_app/widgets/mytextfield.dart';
+import 'package:pizza_app/widgets/password_field.dart';
 
 class ResetPasswordview extends StatelessWidget {
   const ResetPasswordview({super.key});
@@ -15,7 +14,7 @@ class ResetPasswordview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final newpasswordController = TextEditingController();
-        final confirmpasswordController = TextEditingController();
+    final confirmpasswordController = TextEditingController();
 
     final ResponsiveController responsive = Get.put(ResponsiveController());
     return Scaffold(
@@ -40,8 +39,6 @@ class ResetPasswordview extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   color: AppColors.grey,
                 ),
-              
-            
                 MySize(height: responsive.height(0.02)),
                 MyText(
                   text: "New Password",
@@ -50,17 +47,21 @@ class ResetPasswordview extends StatelessWidget {
                   color: AppColors.primary,
                 ),
                 MySize(height: responsive.height(0.002)),
-                MyTextField(
+                MyPasswordField(
                   controller: newpasswordController,
-                  keyboardType: TextInputType.visiblePassword,
-                  hintText: "Enter your password",
-                  textInputAction: TextInputAction.done,
                   fillColor: Colors.white,
-                  borderColor: AppColors.grey,
-                  textColor: AppColors.grey,
-                  suffixIcon: Icons.visibility_off_outlined,
+                  hintText: "Enter password",
+                  borderColor: Colors.grey,
+                  textColor: Colors.black,
+                  isPassword: true,
+                  validator: (p0) {
+                    if (p0 == null || p0.isEmpty) {
+                      return "Please enter your password";
+                    }
+                    return null;
+                  },
                 ),
-                     MySize(height: responsive.height(0.02)),
+                MySize(height: responsive.height(0.02)),
                 MyText(
                   text: "Confirm Password",
                   fontSize: 14,
@@ -68,17 +69,19 @@ class ResetPasswordview extends StatelessWidget {
                   color: AppColors.primary,
                 ),
                 MySize(height: responsive.height(0.002)),
-                MyTextField(
+                MyPasswordField(
                   controller: confirmpasswordController,
-                  keyboardType: TextInputType.visiblePassword,
-                  hintText: "Re-enter password",
-                  textInputAction: TextInputAction.done,
                   fillColor: Colors.white,
-                  borderColor: AppColors.grey,
-                  textColor: AppColors.grey,
-                  suffixIcon: Icons.visibility_off_outlined,
+                  borderColor: Colors.grey,
+                  textColor: Colors.black,
+                  isPassword: true,
+                  validator: (p0) {
+                    if (p0 == null || p0.isEmpty) {
+                      return "Please enter your Confirm password";
+                    }
+                    return null;
+                  },
                 ),
-               
                 MySize(height: 25),
                 Mybutton(
                     width: responsive.width(0.9),
@@ -90,7 +93,6 @@ class ResetPasswordview extends StatelessWidget {
                     text: Constants.resetpassword,
                     backgroundColor: AppColors.secondary,
                     textColor: Colors.white),
-               
               ]),
         ),
       ),

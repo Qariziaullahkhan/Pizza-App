@@ -30,6 +30,8 @@ class Constants {
   static const String passwrordresset = "Your password has been reset  successfully!";
   static const String done = "Done";
   static const String pizaa = "Pizza";
+  static const String burger = "Burgers";
+  static const String cake = "Cakes";
   static const String addressLine = "579, Air Line Society";
   static const String delivery = "Delivery to";
   static const String searchproducts = "Search Products";
@@ -42,5 +44,6 @@ class Constants {
   static const String notifications = "Notifications";
   static const String  allorders = "All Orders";
   static const String edit = "Edit Profile";
+
 
 }

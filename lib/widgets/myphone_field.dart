@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:intl_phone_field/phone_number.dart'; // Import for PhoneNumber type
 
 class MyPhoneField extends StatelessWidget {
   final TextEditingController controller;
@@ -10,6 +11,7 @@ class MyPhoneField extends StatelessWidget {
   final bool showDropdownIcon;
   final bool showCountryFlag;
   final Function(String)? onChanged;
+  final String? Function(PhoneNumber?)? validator; 
 
   const MyPhoneField({
     super.key,
@@ -21,6 +23,7 @@ class MyPhoneField extends StatelessWidget {
     this.showCountryFlag = true,
     this.showDropdownIcon = true,
     this.onChanged,
+    this.validator, // Keep it here
   });
 
   @override
@@ -28,34 +31,37 @@ class MyPhoneField extends StatelessWidget {
     return IntlPhoneField(
       controller: controller,
       disableLengthCheck: true,
-      showCountryFlag: showCountryFlag, // ✅ Show country flag
-            initialCountryCode: initialCountryCode,
-
-      showDropdownIcon: showDropdownIcon, // ✅ Show dropdown arrow
-      autovalidateMode: AutovalidateMode.disabled,
+      showCountryFlag: showCountryFlag,
+      initialCountryCode: initialCountryCode,
+      showDropdownIcon: showDropdownIcon,
+      validator: validator, 
+      dropdownIcon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       keyboardType: TextInputType.phone,
       textInputAction: TextInputAction.done,
       onChanged: (phone) => onChanged?.call(phone.completeNumber),
       decoration: InputDecoration(
         fillColor: fillColor,
         filled: true,
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 1, color: borderColor),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 1, color: borderColor),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        border: OutlineInputBorder(
-          borderSide: BorderSide(width: 1, color: borderColor),
-          borderRadius: BorderRadius.circular(10),
-        ),
+        hintText: "Phone Number",
         hintStyle: TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: 15,
-          color: textColor,
+          color: textColor.withOpacity(0.5),
         ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(width: 1, color: borderColor),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(width: 1, color: borderColor),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(width: 1, color: borderColor),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        errorStyle: TextStyle(color: Colors.red, fontSize: 12),
       ),
     );
   }
