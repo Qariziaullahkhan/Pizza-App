@@ -8,7 +8,7 @@ import 'package:pizza_app/widgets/my_size.dart';
 import 'package:pizza_app/widgets/mybutton.dart';
 import 'package:pizza_app/widgets/myphone_field.dart';
 import 'package:pizza_app/widgets/mytext.dart';
-import 'package:pizza_app/widgets/mytextfield.dart';
+import 'package:pizza_app/widgets/password_field.dart';
 
 class Loginview extends StatelessWidget {
   const Loginview({super.key});
@@ -67,14 +67,18 @@ class Loginview extends StatelessWidget {
                   color: AppColors.grey,
                 ),
                 MySize(height: responsive.height(0.002)),
-                MyTextField(
+                MyPasswordField(
                   controller: passwordController,
-                  keyboardType: TextInputType.visiblePassword,
-                  textInputAction: TextInputAction.done,
                   fillColor: Colors.white,
-                  borderColor: AppColors.grey,
+                  borderColor: Colors.grey,
                   textColor: Colors.black,
-                  suffixIcon: Icons.visibility_off_outlined,
+                  isPassword: true,
+                  validator: (p0) {
+                    if (p0 == null || p0.isEmpty) {
+                      return "Please enter your password";
+                    }
+                    return null;
+                  },
                 ),
                 MySize(height: responsive.height(0.02)),
                 GestureDetector(

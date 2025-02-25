@@ -5,7 +5,7 @@ import 'package:pizza_app/views/auth/login_view.dart';
 import 'package:pizza_app/views/auth/otp_view.dart';
 import 'package:pizza_app/views/auth/reset_password_view.dart';
 import 'package:pizza_app/views/auth/signup_screen.dart';
-import 'package:pizza_app/views/home/dashboard_view.dart';
+import 'package:pizza_app/views/dashboard/dashboard_view.dart';
 
 class AppRoutes {
   static const String register = '/register';
