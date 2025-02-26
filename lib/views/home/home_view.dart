@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pizza_app/controller/product_controller.dart';
 import 'package:pizza_app/utils/colors.dart';
 import 'package:pizza_app/utils/constants.dart';
 import 'package:pizza_app/utils/responsive.dart';
-import 'package:pizza_app/widgets/burger_card.dart';
-import 'package:pizza_app/widgets/chocklate_card.dart';
+import 'package:pizza_app/views/category/category_view.dart';
 import 'package:pizza_app/widgets/my_size.dart';
 import 'package:pizza_app/widgets/mytext.dart';
 import 'package:pizza_app/widgets/pizza_card.dart';
@@ -16,6 +16,8 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ResponsiveController responsive = Get.put(ResponsiveController());
+    final ProductController controller = Get.put(ProductController());
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -101,207 +103,65 @@ class HomeView extends StatelessWidget {
               ),
             ),
             // to write me container
-            Container(
-              margin: const EdgeInsets.only(
-                left: 18,
-                right: 10,
-              ),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(7),
-                  topRight: Radius.circular(7),
-                ),
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      MyText(
-                        text: Constants.pizaa,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.primary,
-                      ),
-                      Spacer(),
-                      MyText(
-                        text: "view all",
-                        fontSize: 12,
-                        fontWeight: FontWeight.w300,
-                        color: AppColors.secondary,
-                      ),
-                      const Icon(
-                        Icons.arrow_forward_ios,
-                        color: AppColors.secondary,
-                        size: 12,
-                      ),
-                      MySize(width: 10),
-                    ],
-                  ),
-                  MySize(height: 10),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        PizzaCard(
-                          imagePath: "assets/images/pizza.png",
-                          title: "Chicken Pizza",
-                        ),
-                        MySize(width: 10),
-                        PizzaCard(
-                          imagePath: "assets/images/fatija.png",
-                          title: "Fajita Pizza",
-                        ),
-                        MySize(width: 10),
-                        PizzaCard(
-                          imagePath: "assets/images/supreem.png",
-                          title: "Supreme Pizza",
-                        ),
-                      ],
-                    ),
-                  )
-                  ////to removed oveflow
-                ],
-              ),
-            ),
-            //burgers
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-              margin: const EdgeInsets.only(
-                left: 18,
-                right: 10,
-              ),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(7),
-                  topRight: Radius.circular(7),
-                ),
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      MyText(
-                        text: Constants.burger,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.primary,
-                      ),
-                      Spacer(),
-                      MyText(
-                        text: "view all",
-                        fontSize: 12,
-                        fontWeight: FontWeight.w300,
-                        color: AppColors.secondary,
-                      ),
-                      const Icon(
-                        Icons.arrow_forward_ios,
-                        color: AppColors.secondary,
-                        size: 12,
-                      ),
-                      MySize(width: 10),
-                    ],
-                  ),
-                  MySize(height: 10),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        BurgerCard(
-                          imagePath: "assets/images/chicken.png",
-                          title: "Chicken Burger",
-                        ),
-                        MySize(width: 5),
-                        PizzaCard(
-                          imagePath: "assets/images/beef.png",
-                          title: "Beef Burger",
-                        ),
-                        MySize(width: 5),
-                        PizzaCard(
-                          imagePath: "assets/images/pretty.png",
-                          title: "Pretty Burger",
-                        ),
-                      ],
-                    ),
-                  )
-
-                  ////to removed oveflow
-                ],
-              ),
-            ),
-            MySize(height: 10),
-            Container(
-              margin: const EdgeInsets.only(
-                left: 18,
-                right: 10,
-              ),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(7),
-                  topRight: Radius.circular(7),
-                ),
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      MyText(
-                        text: Constants.cake,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.primary,
-                      ),
-                      Spacer(),
-                      MyText(
-                        text: "view all",
-                        fontSize: 12,
-                        fontWeight: FontWeight.w300,
-                        color: AppColors.secondary,
-                      ),
-                      const Icon(
-                        Icons.arrow_forward_ios,
-                        color: AppColors.secondary,
-                        size: 12,
-                      ),
-                      MySize(width: 10),
-                    ],
-                  ),
-                  MySize(height: 10),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        CakeCards(
-                          imagePath: "assets/images/chocklate.png",
-                          title: "Chocklate Cake",
-                        ),
-                        MySize(width: 10),
-                        CakeCards(
-                          imagePath: "assets/images/cramel.png",
-                          title: "Caramel Cake",
-                        ),
-                        MySize(width: 10),
-                        CakeCards(
-                          imagePath: "assets/images/strewbery.png",
-                          title: "Strawberry Cake",
-                        ),
-                      ],
-                    ),
-                  )
-                  ////to removed oveflow
-                ],
-              ),
+            Column(
+              children: controller.productCategories.keys.map((category) {
+                return _buildCategorySection(
+                    category, controller.productCategories[category]!);
+              }).toList(),
             ),
           ],
         ),
       ),
     );
   }
+}
+
+Widget _buildCategorySection(String category, List products) {
+  return Container(
+    margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+    width: double.infinity,
+    decoration: BoxDecoration(borderRadius: BorderRadius.circular(7)),
+    child: Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            MyText(
+                text: category,
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: AppColors.primary),
+            GestureDetector(
+              onTap: () =>
+                  Get.to(() => CategoryDetailScreen(categoryName: category)),
+              child: Row(
+                children: [
+                  MyText(
+                      text: "View All",
+                      fontSize: 12,
+                      fontWeight: FontWeight.w300,
+                      color: AppColors.secondary),
+                  const Icon(Icons.arrow_forward_ios,
+                      color: AppColors.secondary, size: 12),
+                ],
+              ),
+            ),
+          ],
+        ),
+        MySize(height: 10),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: products
+                .map((product) => Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: PizzaCard(
+                          imagePath: product.imagePath, title: product.title),
+                    ))
+                .toList(),
+          ),
+        )
+      ],
+    ),
+  );
 }
