@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:pizza_app/utils/colors.dart';
 import 'package:pizza_app/utils/constants.dart';
 import 'package:pizza_app/utils/responsive.dart';
-import 'package:pizza_app/views/auth/reset_password_view.dart';
 import 'package:pizza_app/widgets/my_otp.dart';
 import 'package:pizza_app/widgets/my_size.dart';
 import 'package:pizza_app/widgets/mybutton.dart';

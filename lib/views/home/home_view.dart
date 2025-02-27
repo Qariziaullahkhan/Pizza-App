@@ -4,6 +4,7 @@ import 'package:pizza_app/controller/product_controller.dart';
 import 'package:pizza_app/utils/colors.dart';
 import 'package:pizza_app/utils/constants.dart';
 import 'package:pizza_app/utils/responsive.dart';
+import 'package:pizza_app/views/cart/cart_view.dart';
 import 'package:pizza_app/views/category/category_view.dart';
 import 'package:pizza_app/widgets/my_size.dart';
 import 'package:pizza_app/widgets/mytext.dart';
@@ -155,12 +156,15 @@ Widget _buildCategorySection(String category, List products) {
             children: products
                 .map((product) => Padding(
                       padding: const EdgeInsets.only(right: 10),
-                      child: PizzaCard(
-                          imagePath: product.imagePath, title: product.title),
+                      child: GestureDetector(
+                        onTap: () => Get.to(() => CartViewScreen(imagePath: product.imagePath,title: product.toString(),)),
+                        child: PizzaCard(
+                            imagePath: product.imagePath, title: product.title),
+                      ),
                     ))
                 .toList(),
           ),
-        )
+        ),
       ],
     ),
   );

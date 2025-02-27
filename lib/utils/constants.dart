@@ -44,6 +44,7 @@ class Constants {
   static const String notifications = "Notifications";
   static const String  allorders = "All Orders";
   static const String edit = "Edit Profile";
+  static const String appartment = "CIA Apartments";
 
 
 }
