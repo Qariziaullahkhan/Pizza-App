@@ -13,4 +13,8 @@ class Images {
   static const String chocklatecake = "assets/images/chocklate.png";
   static const String caremelcake = "assets/images/cramel.png";
   static const String strawberrycake = "assets/images/strewbery.png";
+  static const String edit = "assets/images/edit.png";
+  static const String delete = "assets/images/delete.png";
+  static const String local = "assets/images/local.png";
+  static const String orderpizza = "assets/images/orderpizza.jpeg";
 }

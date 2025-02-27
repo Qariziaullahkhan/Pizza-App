@@ -11,6 +11,8 @@ class MyText extends StatelessWidget {
   final Color? decorationColor; // Optional decoration color
   final TextAlign? textAlign;
   final double? letterSpacing;
+  final double? height;
+  final TextDecorationStyle? decorationStyle;
 
   const MyText({
     super.key,
@@ -23,6 +25,8 @@ class MyText extends StatelessWidget {
     this.decorationColor,
     this.textAlign,
     this.letterSpacing,
+    this.height,
+    this.decorationStyle,
   });
 
   @override
@@ -39,6 +43,8 @@ class MyText extends StatelessWidget {
         fontStyle: fontStyle,
         decoration: decoration,
         decorationColor: decorationColor,
+        height: height,
+        decorationStyle: decorationStyle
       ),
     );
   }

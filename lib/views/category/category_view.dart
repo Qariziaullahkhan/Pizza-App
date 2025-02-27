@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:pizza_app/controller/product_controller.dart';
 import 'package:pizza_app/model/product_model.dart';
 import 'package:pizza_app/utils/colors.dart';
-import 'package:pizza_app/utils/constants.dart';
 
 class CategoryDetailScreen extends StatelessWidget {
   final String categoryName;
@@ -12,14 +11,20 @@ class CategoryDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ProductController controller = Get.find<ProductController>();
+
+    // ✅ Ensure only selected category's products are fetched
     List<ProductModel> products =
         controller.productCategories[categoryName] ?? [];
 
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        leading: IconButton(onPressed: () => Get.back(), icon: Icon(Icons.arrow_back_ios,color: AppColors.secondary,)),
-        title: Text(Constants.pizaa,style: TextStyle(color: AppColors.secondary),)),
+        leading: IconButton(
+          onPressed: () => Get.back(),
+          icon: Icon(Icons.arrow_back_ios, color: AppColors.secondary),
+        ),
+        title: Text(categoryName, style: TextStyle(color: AppColors.secondary)),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: GridView.builder(
@@ -29,7 +34,6 @@ class CategoryDetailScreen extends StatelessWidget {
             childAspectRatio: 0.8,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
-            
           ),
           itemBuilder: (context, index) {
             return Container(
@@ -40,8 +44,7 @@ class CategoryDetailScreen extends StatelessWidget {
               child: Column(
                 children: [
                   ClipRRect(
-                    borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(7)),
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(7)),
                     child: Image.asset(
                       products[index].imagePath,
                       width: 179,

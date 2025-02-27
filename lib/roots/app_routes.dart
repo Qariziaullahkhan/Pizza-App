@@ -5,6 +5,7 @@ import 'package:pizza_app/views/auth/login_view.dart';
 import 'package:pizza_app/views/auth/otp_view.dart';
 import 'package:pizza_app/views/auth/reset_password_view.dart';
 import 'package:pizza_app/views/auth/signup_screen.dart';
+import 'package:pizza_app/views/category/category_view.dart';
 import 'package:pizza_app/views/dashboard/dashboard_view.dart';
 
 class AppRoutes {
@@ -15,6 +16,7 @@ class AppRoutes {
   static const String otp = '/otp';
   static const String resetPassword = '/reset';
   static const String done = '/done';
+  static const String category = '/category';
 
   static List<GetPage> routes = [
     GetPage(name: register, page: () => const RegisterView()),
@@ -24,6 +26,7 @@ class AppRoutes {
     GetPage(name: otp, page: () => const OtpView()),
     GetPage(name: resetPassword, page: () => const ResetPasswordview()),
     GetPage(name: done, page: () => const DoneView()),
+    GetPage(name: category, page: () => const CategoryDetailScreen(categoryName: '',)),
   ];
 
 }
