@@ -93,7 +93,7 @@ class Loginview extends StatelessWidget {
                 ),
                 MySize(height: 25),
                 Mybutton(
-                    width: responsive.width(0.9),
+                    width:double.infinity,
                     height: responsive.height(0.07),
                     borderRadius: BorderRadius.circular(10),
                     onPressed: () {

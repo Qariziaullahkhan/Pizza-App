@@ -151,29 +151,29 @@ class RegisterView extends StatelessWidget {
                     color: AppColors.grey,
                   ),
                   MySize(height: responsive.height(0.002)),
-                MyPasswordField(
-                  controller: passwordController,
-                  fillColor: Colors.white,
-                  borderColor: Colors.grey,
-                  textColor: Colors.black,
-                  isPassword: true,
-                  validator: (p0) {
-                    if (p0 == null || p0.isEmpty) {
-                      return "Please enter your password";
-                    }
-                    return null;
-                  },
-                ),
+                  MyPasswordField(
+                    controller: passwordController,
+                    fillColor: Colors.white,
+                    borderColor: Colors.grey,
+                    textColor: Colors.black,
+                    isPassword: true,
+                    // validator: (p0) {
+                    //   if (p0 == null || p0.isEmpty) {
+                    //     return "Please enter your password";
+                    //   }
+                    //   return null;
+                    // },
+                  ),
                   MySize(height: 25),
                   Mybutton(
-                      width: responsive.width(0.9),
+                      width:double.infinity,
                       height: responsive.height(0.07),
                       borderRadius: BorderRadius.circular(10),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-
                           _formKey.currentState!.save();
-                          Get.toNamed('/login');
+                          Get.offAllNamed(
+                              '/dashboard'); // Yeh previous stack hata kar home le jayega
                         }
                       },
                       text: Constants.register,

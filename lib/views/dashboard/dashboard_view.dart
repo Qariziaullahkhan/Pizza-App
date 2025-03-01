@@ -23,7 +23,7 @@ class DashboardView extends StatelessWidget {
 
     final List<Widget> screens = [
       const HomeView(),
-      const OrderView(),
+       OrderView(),
       const FavouriteView(),
       const AddressView(),
       const ProfileView(),

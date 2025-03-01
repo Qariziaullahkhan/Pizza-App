@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pizza_app/utils/colors.dart';
 import 'package:pizza_app/utils/constants.dart';
@@ -16,7 +17,7 @@ class ProfileView extends StatelessWidget {
           icon: Icon(Icons.arrow_back_ios,
               color: AppColors.secondary), // Leading Icon
           onPressed: () {
-            Navigator.pop(context); // Back Navigation
+            Get.back(); // Back Navigation
           },
         ),
         title: Text(

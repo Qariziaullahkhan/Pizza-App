@@ -38,7 +38,7 @@ class CustomListTileView extends StatelessWidget {
                   height: 45,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: const Color(0xFFB80A19).withOpacity(0.2),
+                    color: const Color(0xFFB80A19).withOpacity(0.1),
                   ),
                 ),
               ),
@@ -47,8 +47,8 @@ class CustomListTileView extends StatelessWidget {
             ClipOval(
               child: Image.asset(
                 imagePath,
-                width: 35,
-                height: 35,
+                width: 26,
+                height: 25,
                 fit: BoxFit.cover,
               ),
             ),
