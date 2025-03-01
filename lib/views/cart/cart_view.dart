@@ -19,9 +19,9 @@ class CartViewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ResponsiveController responsive = Get.put(ResponsiveController());
     final CheckBoxController controller = Get.put(CheckBoxController());
-  final CounterController counterController = Get.put(CounterController());
-  final BottomNavController bottomNavController = Get.put(BottomNavController());
-
+    final CounterController counterController = Get.put(CounterController());
+    final BottomNavController bottomNavController =
+        Get.put(BottomNavController());
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -29,47 +29,48 @@ class CartViewScreen extends StatelessWidget {
         child: Column(
           children: [
             Stack(
-  children: [
-    // Background Image Container
-    Container(
-      width: double.infinity,
-      height: responsive.height(0.4), // 262 responsive
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(imagePath),
-          fit: BoxFit.cover,
-        ),
-      ),
-    ),
+              children: [
+                // Background Image Container
+                Container(
+                  width: double.infinity,
+                  height: responsive.height(0.4), // 262 responsive
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(imagePath),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
 
-    // Circular Close Button
-    Positioned(
-      top: 27, // Adjust position as needed
-      left: 16, // Adjust position as needed
-      child: GestureDetector(
-        onTap: () {
-          Get.back(); // Close the page using GetX
-        },
-        child: Container(
-          width: 40, // Circular size
-          height: 40,
-          decoration: BoxDecoration(
-            color: Colors.white, // Background color
-            shape: BoxShape.circle, // Circular shape
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26, 
-                blurRadius: 4, 
-                spreadRadius: 2,
-              ),
-            ],
-          ),
-          child: Icon(Icons.close, color: AppColors.secondary), // Close icon
-        ),
-      ),
-    ),
-  ],
-),
+                // Circular Close Button
+                Positioned(
+                  top: 27, // Adjust position as needed
+                  left: 16, // Adjust position as needed
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.back(); // Close the page using GetX
+                    },
+                    child: Container(
+                      width: 40, // Circular size
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.white, // Background color
+                        shape: BoxShape.circle, // Circular shape
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 4,
+                            spreadRadius: 2,
+                          ),
+                        ],
+                      ),
+                      child: Icon(Icons.close,
+                          color: AppColors.secondary), // Close icon
+                    ),
+                  ),
+                ),
+              ],
+            ),
 
             const SizedBox(height: 10),
             Row(
@@ -333,106 +334,103 @@ class CartViewScreen extends StatelessWidget {
               child: Column(
                 children: [
                   MyText(
-                      text: "e.g no mayo", 
+                      text: "e.g no mayo",
                       fontSize: 16,
                       fontWeight: FontWeight.w400),
                   MySize(height: 1),
-                  
                 ],
               ),
             ),
-                  MySize(
-                    height: 10,
-                  ),
-              // to container in row with decreament in increament button to increase and decrease values
-             Container(
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // Increment-Decrement Buttons
-          Row(
-            children: [
-              // Decrease Button (-)
-              GestureDetector(
-                onTap: counterController.decrement,
-                child: Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                    color: Colors.red.withOpacity(0.1), // Light red
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Icon(Icons.remove, color: Colors.red),
-                ),
+            MySize(
+              height: 10,
+            ),
+            // to container in row with decreament in increament button to increase and decrease values
+            Container(
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
               ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Increment-Decrement Buttons
+                  Row(
+                    children: [
+                      // Decrease Button (-)
+                      GestureDetector(
+                        onTap: counterController.decrement,
+                        child: Container(
+                          width: 36,
+                          height: 36,
+                          decoration: BoxDecoration(
+                            color: Colors.red.withOpacity(0.1), // Light red
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Icon(Icons.remove, color: Colors.red),
+                        ),
+                      ),
 
-              // Counter Value
-              const SizedBox(width: 12),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Obx(() => Text(
-                      "${counterController.count.value}",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    )),
-              ),
-                  const SizedBox(width: 12),
-              // Increase Button (+)
-              GestureDetector(
-                onTap: counterController.increment,
-                child: Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                    color: AppColors.secondary, // Solid red
-                    borderRadius: BorderRadius.circular(6),
+                      // Counter Value
+                      const SizedBox(width: 12),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Obx(() => Text(
+                              "${counterController.count.value}",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            )),
+                      ),
+                      const SizedBox(width: 12),
+                      // Increase Button (+)
+                      GestureDetector(
+                        onTap: counterController.increment,
+                        child: Container(
+                          width: 36,
+                          height: 36,
+                          decoration: BoxDecoration(
+                            color: AppColors.secondary, // Solid red
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Icon(Icons.add, color: Colors.white),
+                        ),
+                      ),
+                    ],
                   ),
-                  child: Icon(Icons.add, color: Colors.white),
-                ),
-              ),
-            ],
-          ),
 
-          // Add to Cart Button
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.secondary,
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+                  // Add to Cart Button
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.secondary,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    onPressed: () {
+                      final BottomNavController bottomNavController =
+                          Get.find();
+                      // OrderView ka index (1) par navigate karein
+                      bottomNavController.changeTab(1);
+                      // Add to cart logic here
+                    },
+                    child: Text("Add to Cart",
+                        style: TextStyle(color: Colors.white)),
+                  ),
+                ],
               ),
             ),
-            onPressed: () {
-               final BottomNavController bottomNavController = Get.find();
-    // OrderView ka index (1) par navigate karein
-    bottomNavController.changeTab(1);
-              // Add to cart logic here
-            },
-            child: Text("Add to Cart", style: TextStyle(color: Colors.white)),
-          ),
-        ],
-      ),
-    ),
             MySize(
               height: 22,
             ),
-           
+
             MySize(
               height: 22,
             ),
-           
           ],
         ),
-
       ),
     );
-
-
-          
-     
   }
 }

@@ -45,6 +45,11 @@ class Constants {
   static const String  allorders = "All Orders";
   static const String edit = "Edit Profile";
   static const String appartment = "CIA Apartments";
-
+   static const String additem = "Add more item";
+   static const String applycode = "Apply more code";
+   static const String subtotal = "Subtotal";
+   static const String total = "Total Price";
+   static const String deliverycharges = "Delivery charges";
+   static const String confirmpayment = "Confirm Payment and address";
 
 }

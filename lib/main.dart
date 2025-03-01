@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           
         ),
-        initialRoute: AppRoutes.register,
+        initialRoute: AppRoutes.login,
         getPages:AppRoutes.routes,
     );
   }

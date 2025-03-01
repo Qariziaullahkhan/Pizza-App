@@ -7,9 +7,9 @@ import 'package:pizza_app/views/profile/profile.dart';
 
 class BottomNavController extends GetxController {
   var currentIndex = 0.obs;
-  final screes = [
+  final screens = [
     const DashboardView(),
-    const OrderView(),
+     OrderView(),
     const FavouriteView(),
     const AddressView(),
     const ProfileView(),
