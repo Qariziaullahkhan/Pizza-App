@@ -30,8 +30,7 @@ class MyPasswordField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final PasswordController passwordController = Get.put(PasswordController());
-
+    final passwordController = Get.find<PasswordController>();
     return Obx(() => TextFormField(
           controller: controller,
           keyboardType: keyboardType ?? TextInputType.text,

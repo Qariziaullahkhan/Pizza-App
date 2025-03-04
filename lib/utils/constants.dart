@@ -8,6 +8,9 @@ class Constants {
   static const String mobilepassword = "Enter your mobile number and password to login ";
   static const String already = "Do you have already account?";
   static const String dont = "Don’t have an account?";
+  static const String logout = "Logout";
+  static const String logoutMessage = "Are you sure you want to log out?";
+  static const String cancel = "Cancel";
   static const String register = "Register";
   static const String login = "Log In";
   static const String signin = "Sign In";

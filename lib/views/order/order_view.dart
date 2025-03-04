@@ -179,7 +179,7 @@ class OrderView extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Mybutton(
+          child: MyButton(
             backgroundColor: AppColors.secondary,
             onPressed: () {},
             text: Constants.confirmpayment,
