@@ -9,8 +9,9 @@ import 'package:pizza_app/views/category/category_view.dart';
 import 'package:pizza_app/views/dashboard/dashboard_view.dart';
 
 class AppRoutes {
-  static const String register = '/register';
   static const String login = '/login';
+
+  static const String register = '/register';
   static const String dashboard = '/dashboard';
   static const String forgotPassword = '/forgot';
   static const String otp = '/otp';
@@ -19,14 +20,17 @@ class AppRoutes {
   static const String category = '/category';
 
   static List<GetPage> routes = [
-    GetPage(name: register, page: () => const RegisterView()),
-    GetPage(name: login, page: () => const Loginview()),
+    GetPage(name: login, page: () =>  LoginView()),
+    GetPage(name: register, page: () =>  RegisterView()),
     GetPage(name: dashboard, page: () => const DashboardView()),
     GetPage(name: forgotPassword, page: () => const Forgotview()),
     GetPage(name: otp, page: () => const OtpView()),
     GetPage(name: resetPassword, page: () => const ResetPasswordview()),
     GetPage(name: done, page: () => const DoneView()),
-    GetPage(name: category, page: () => const CategoryDetailScreen(categoryName: '',)),
+    GetPage(
+        name: category,
+        page: () => const CategoryDetailScreen(
+              categoryName: '',
+            )),
   ];
-
 }

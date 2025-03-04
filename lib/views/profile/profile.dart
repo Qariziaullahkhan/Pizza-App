@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pizza_app/controller/auth_controller.dart';
 import 'package:pizza_app/utils/colors.dart';
 import 'package:pizza_app/utils/constants.dart';
 import 'package:pizza_app/utils/images.dart';
+import 'package:pizza_app/widgets/logout_dialog.dart';
 import 'package:pizza_app/widgets/order_list.dart';
 
 class ProfileView extends StatelessWidget {
@@ -11,6 +13,8 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        final AuthController authController = Get.put(AuthController());
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -86,10 +90,22 @@ class ProfileView extends StatelessWidget {
               imagePath: "assets/images/terms.png",
               title: "Terms and Conditions",
               subtitle: "Know Your Rights & Responsibilities"),
-          CustomListTileView(
-              imagePath: "assets/images/logout.png",
-              title: "Log out",
-              subtitle: "Ready to take a break? Log out securely!"),
+          GestureDetector(
+            onTap: () {
+              Get.dialog(
+                 LogoutDialog(
+                  onLogout: ()async{
+                    await authController.logout();
+                  },
+                ),
+                barrierDismissible: false, // Prevent dialog from closing on outside tap
+              );
+            },
+            child: CustomListTileView(
+                imagePath: "assets/images/logout.png",
+                title: "Log out",
+                subtitle: "Ready to take a break? Log out securely!"),
+          ),
         ],
       ),
     );

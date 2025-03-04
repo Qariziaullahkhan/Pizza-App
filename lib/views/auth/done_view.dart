@@ -45,11 +45,11 @@ class DoneView extends StatelessWidget {
               letterSpacing: 0,
             ),
             MySize(height: responsive.height(0.02)),
-           Mybutton(
+           MyButton(
             width: responsive.width(0.9),
             height: responsive.height(0.07),
             backgroundColor: AppColors.secondary,
-            onPressed: () => Get.to(() => Loginview()), text: "Done"),
+            onPressed: () => Get.to(() => LoginView()), text: "Done"),
           ],
         ),
       ),

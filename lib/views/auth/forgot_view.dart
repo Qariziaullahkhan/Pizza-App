@@ -62,7 +62,7 @@ class Forgotview extends StatelessWidget {
                 ),
 
                 MySize(height: 25),
-                Mybutton(
+                MyButton(
                     width: responsive.width(0.9),
                     height: responsive.height(0.07),
                     borderRadius: BorderRadius.circular(10),
