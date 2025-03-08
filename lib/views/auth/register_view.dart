@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pizza_app/controller/auth_controller.dart';
-import 'package:pizza_app/model/user_model.dart';
 import 'package:pizza_app/roots/app_routes.dart';
 import 'package:pizza_app/utils/colors.dart';
 import 'package:pizza_app/utils/constants.dart';
@@ -61,7 +60,7 @@ class RegisterView extends StatelessWidget {
                 ),
                 MyTextField(
                   controller: firstnameController,
-                   keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.name,
                   textInputAction: TextInputAction.next,
                   fillColor: Colors.white,
                   borderColor: AppColors.grey,
@@ -105,7 +104,7 @@ class RegisterView extends StatelessWidget {
                 ),
                 MyTextField(
                   controller: emailController,
-                   keyboardType: TextInputType.name,
+                  keyboardType: TextInputType.name,
                   textInputAction: TextInputAction.next,
                   fillColor: Colors.white,
                   borderColor: AppColors.grey,
@@ -129,68 +128,74 @@ class RegisterView extends StatelessWidget {
                   color: AppColors.grey,
                 ),
                 MyPhoneField(
-                  controller: phoneController,
-                  fillColor: Colors.white,
-                  borderColor: AppColors.grey,
-                  textColor: Colors.black,
-                  validator: (value) {
-                    if (value == null || value.number.isEmpty) {
+                  controller: phoneController, // Yeh main controller use karega
+                  validator: (phoneNumber) {
+                    if (phoneNumber == null || phoneNumber.number.isEmpty) {
                       return "Please enter your phone number";
+                    }
+                    if (phoneNumber.completeNumber.length < 10) {
+                      // Minimum length check
+                      return "Please enter a valid phone number";
                     }
                     return null;
                   },
+                  fillColor: Colors.white,
+                  borderColor: AppColors.grey,
+                  textColor: Colors.black,
                 ),
+
                 MySize(height: responsive.height(0.02)),
                 // Password Field
                 MyText(
                   text: "Password",
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.grey,
+                  color: AppColors.white,
                 ),
-                 MyPasswordField(
-              controller: passwordController,
-              isPassword: true,
-              
-              borderColor: AppColors.grey,
-              textColor: Colors.black,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your password';
-                }
-                return null;
-              },
-            ),
+                MyPasswordField(
+                  controller: passwordController,
+                  isPassword: true,
+                  borderColor: AppColors.grey,
+                  textColor: Colors.black,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your password';
+                    }
+                    return null;
+                  },
+                ),
                 MySize(height: 25),
                 // Register Button
                 Obx(() {
                   return authController.isLoading.value
                       ? Center(child: CircularProgressIndicator())
                       : MyButton(
-                          text: Constants.register,
-                          backgroundColor: AppColors.secondary,
                           width: responsive.width(0.9),
-                      height: responsive.height(0.07),
+                          height: responsive.height(0.07),
+                          backgroundColor: AppColors.secondary,
+                          text: Constants.register,
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              // Create a UserModel object
-                              UserModel user = UserModel(
-                                firstName: firstnameController.text,
-                                lastName: lastnameController.text,
-                                email: emailController.text,
-                                phone: phoneController.text,
-                                password: passwordController.text,
-                              );
-                                 
-                              // Call the register method from AuthController
-                              authController.registerUser(user);
+                              // Save user data to the controller
+                              authController.firstName.value =
+                                  firstnameController.text;
+                              authController.lastName.value =
+                                  lastnameController.text;
+                              authController.email.value = emailController.text;
+                              authController.phoneNumber.value =
+                                  phoneController.text;
+                              authController.password.value =
+                                  passwordController.text;
+
+                              // Send OTP
+                              authController.sendOtp(phoneController.text);
                             }
                           },
                         );
                 }),
                 MySize(height: responsive.height(0.03)),
                 // Error Message
-                
+
                 // Navigate to Login Screen
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

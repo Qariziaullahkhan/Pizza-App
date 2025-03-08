@@ -36,14 +36,12 @@ class MyTextField extends StatelessWidget {
         color: textColor ?? Colors.black, 
       ),
       controller: controller,
+      validator: validator,
       keyboardType: keyboardType ?? TextInputType.text, 
       textInputAction: textInputAction ?? TextInputAction.done, 
       decoration: InputDecoration(
-        prefixIcon: prefixIcon != null ? Icon(prefixIcon, color: borderColor ?? Colors.blue) : null,
-        suffixIcon: suffixIcon != null ? Icon(suffixIcon, color: borderColor ?? Colors.blue) : null,
-        fillColor: fillColor ?? Colors.grey[200], 
-        filled: true,
-        enabledBorder: OutlineInputBorder(
+        border: InputBorder.none,
+         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(width: 1, color: borderColor ?? Colors.blue, style: BorderStyle.solid),
           borderRadius: BorderRadius.circular(10),
         ),
@@ -51,10 +49,12 @@ class MyTextField extends StatelessWidget {
           borderSide: BorderSide(width: 1, color: borderColor ?? Colors.blue, style: BorderStyle.solid),
           borderRadius: BorderRadius.circular(10),
         ),
-        border: OutlineInputBorder(
-          borderSide: BorderSide(width: 1, color: borderColor ?? Colors.blue, style: BorderStyle.solid),
-          borderRadius: BorderRadius.circular(10),
-        ),
+        
+        prefixIcon: prefixIcon != null ? Icon(prefixIcon, color: borderColor ?? Colors.blue) : null,
+        suffixIcon: suffixIcon != null ? Icon(suffixIcon, color: borderColor ?? Colors.blue) : null,
+        fillColor: fillColor ?? Colors.grey[200], 
+        filled: true,
+       
         hintText: hintText ?? "", 
         hintStyle: TextStyle(fontSize: 15, color: textColor ?? Colors.black),
       ),

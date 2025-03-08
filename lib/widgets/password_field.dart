@@ -35,10 +35,22 @@ class MyPasswordField extends StatelessWidget {
           controller: controller,
           keyboardType: keyboardType ?? TextInputType.text,
           textInputAction: textInputAction ?? TextInputAction.done,
-          obscureText: isPassword ? !passwordController.isPasswordVisible.value : false,
+          obscureText:
+              isPassword ? !passwordController.isPasswordVisible.value : false,
           validator: validator,
           obscuringCharacter: '*',
           decoration: InputDecoration(
+            border: InputBorder.none, // Border completely remove
+            enabledBorder: OutlineInputBorder(
+              borderSide:
+                  BorderSide(width: 1, color: borderColor ?? Colors.blue),
+              borderRadius: BorderRadius.circular(10),
+            ), // No border before click
+            focusedBorder: OutlineInputBorder(
+              borderSide:
+                  BorderSide(width: 1, color: borderColor ?? Colors.blue),
+              borderRadius: BorderRadius.circular(10),
+            ),
             prefixIcon: prefixIcon != null
                 ? Icon(prefixIcon, color: borderColor ?? Colors.blue)
                 : null,
@@ -55,16 +67,9 @@ class MyPasswordField extends StatelessWidget {
                 : null,
             fillColor: fillColor ?? Colors.grey[200],
             filled: true,
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 1, color: borderColor ?? Colors.blue),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 1, color: borderColor ?? Colors.blue),
-              borderRadius: BorderRadius.circular(10),
-            ),
             hintText: hintText ?? "",
-            hintStyle: TextStyle(fontSize: 15, color: textColor ?? Colors.black),
+            hintStyle:
+                TextStyle(fontSize: 15, color: textColor ?? Colors.black),
           ),
         ));
   }

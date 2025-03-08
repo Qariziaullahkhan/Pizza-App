@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pizza_app/controller/auth_controller.dart';
 import 'package:pizza_app/utils/colors.dart';
 import 'package:pizza_app/utils/constants.dart';
 import 'package:pizza_app/utils/responsive.dart';
@@ -15,6 +16,8 @@ class OtpView extends StatelessWidget {
   Widget build(BuildContext context) {
     final otpcontroller = TextEditingController();
     final ResponsiveController responsive = Get.put(ResponsiveController());
+    final AuthController authController = Get.find<AuthController>();
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -31,7 +34,6 @@ class OtpView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // MySize(height: responsive.height(0.09)),
                 MyText(
                   text: Constants.emailverify,
                   fontSize: 20,
@@ -50,15 +52,13 @@ class OtpView extends StatelessWidget {
                   controller: otpcontroller,
                   onCompleted: (p0) {},
                 ),
-                // MySize(height: responsive.height(0.002)),
-
                 MySize(height: 25),
                 MyButton(
                     width: responsive.width(0.9),
                     height: responsive.height(0.07),
                     borderRadius: BorderRadius.circular(10),
                     onPressed: () {
-                      Get.toNamed('/reset');
+                      authController.verifyOtp(otpcontroller.text);
                     },
                     text: Constants.verify,
                     backgroundColor: AppColors.secondary,
@@ -83,8 +83,6 @@ class OtpView extends StatelessWidget {
                     ),
                   ],
                 ),
-
-                //
               ]),
         ),
       ),

@@ -1,129 +1,151 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pizza_app/model/user_model.dart';
 import 'package:pizza_app/roots/app_routes.dart';
+import 'package:pizza_app/model/user_model.dart';
 
 class AuthController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // Reactive variables
-  var isLoading = false.obs; // To track loading state
-  var errorMessage = ''.obs; // To store error messages
+  var verificationId = ''.obs;
+  var isLoading = false.obs;
   var isLoggedOut = false.obs;
+  
+  // User data storage
+  var firstName = ''.obs;
+  var lastName = ''.obs;
+  var email = ''.obs;
+  var phoneNumber = ''.obs;
+  var password = ''.obs;
 
-  /// **Register User**
-  Future<void> registerUser(UserModel user) async {
+  // Step 1: Send OTP
+Future<void> sendOtp(String phone) async {
+  try {
+    isLoading(true);
+
+    // Ensure phone is in E.164 format
+    if (!phone.startsWith("+")) {
+      phone = "+92$phone"; // Assuming Pakistan as default country code
+    }
+
+    await _auth.verifyPhoneNumber(
+      phoneNumber: phone,
+      verificationCompleted: (PhoneAuthCredential credential) async {
+        await _auth.signInWithCredential(credential);
+        print("phone number verified : ${credential.smsCode}");
+        Get.snackbar(
+          "Success", 
+          "Phone number verified automatically!",
+          backgroundColor: Colors.green, // Green color for success
+          colorText: Colors.white,
+        );
+      },
+      verificationFailed: (FirebaseAuthException e) {
+       Get.snackbar(
+          "Error", 
+          e.message ?? "Verification failed",
+          backgroundColor: Colors.red, // Red color for error
+          colorText: Colors.white,
+        );
+      },
+      codeSent: (String verificationId, int? resendToken) {
+        this.verificationId.value = verificationId;
+        Get.toNamed(AppRoutes.otp);
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {
+        
+      },
+    );
+  } catch (e) {
+    Get.snackbar("Error", e.toString());
+  } finally {
+    isLoading(false);
+  }
+}
+
+
+  // Step 2: Verify OTP
+  Future<void> verifyOtp(String otp) async {
     try {
-      isLoading(true); // Start loading
-      errorMessage(''); // Clear any previous error
+      isLoading(true);
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verificationId.value,
+        smsCode: otp,
+      );
 
-      UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
-              email: user.email, password: user.password);
+      UserCredential userCredential = await _auth.signInWithCredential(credential);
 
-      await firestore.collection("users").doc(userCredential.user!.uid).set(
-          user.toMap());
+      // Save user data after successful OTP verification
+      await saveUserData(userCredential.user!.uid);
 
-      Get.snackbar("Success", "Registration successful!",
-          snackPosition: SnackPosition.BOTTOM);
-
-      // Navigate to login screen after successful registration
-      Get.offAllNamed(AppRoutes.login);
-    } on FirebaseAuthException catch (e) {
-      handleAuthErrors(e);
+      Get.snackbar("Success", "Phone verified successfully!",
+      backgroundColor: Colors.green, // Green color for success
+          colorText: Colors.white,
+      );
+      Get.offAllNamed(AppRoutes.dashboard);
     } catch (e) {
-      errorMessage(e.toString()); // Set error message
       Get.snackbar("Error", e.toString(),
-          snackPosition: SnackPosition.BOTTOM);
+        backgroundColor: Colors.red, // Red color for error
+          colorText: Colors.white,
+      );
     } finally {
-      isLoading(false); // Stop loading
+      isLoading(false);
     }
   }
-
-  /// **Login with Phone Number & Password**
-  Future<void> loginWithPhoneNumber(String phoneNumber, String password) async {
+  // **Step 3: Login (Direct Dashboard)**
+  Future<void> loginUser(String phone, ) async {
     try {
-      isLoading(true); // Start loading
-      errorMessage(''); // Clear any previous error
-
-      QuerySnapshot querySnapshot = await firestore
+      isLoading(true);
+      QuerySnapshot userQuery = await _firestore
           .collection("users")
-          .where("phone", isEqualTo: phoneNumber) 
-          .limit(1)
+          .where("phone", isEqualTo: phone)
           .get();
 
-      if (querySnapshot.docs.isEmpty) {
-        Get.snackbar("Login Failed", "No user found with this phone number.",
-            snackPosition: SnackPosition.BOTTOM);
-        return;
+      if (userQuery.docs.isNotEmpty) {
+        Get.snackbar("Success", "Login successful!",
+        backgroundColor: Colors.green, // Green color for success
+          colorText: Colors.white,);
+        Get.offAllNamed(AppRoutes.dashboard); // Direct dashboard per
+      } else {
+        Get.snackbar("Error", "Invalid phone number or password",
+        backgroundColor: Colors.red, // Red color for error
+          colorText: Colors.white,
+        );
       }
-
-      var userData = querySnapshot.docs.first.data() as Map<String, dynamic>;
-      var email = userData['email'];
-
-      if (email == null || email.isEmpty) {
-        Get.snackbar(
-            "Login Failed", "No email associated with this phone number.",
-            snackPosition: SnackPosition.BOTTOM);
-        return;
-      }
-
-      // Login using retrieved email and entered password
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
-
-      Get.snackbar("Success", "Login successful!",
-          snackPosition: SnackPosition.BOTTOM);
-
-      // Navigate to dashboard after login
-      Get.offAllNamed(AppRoutes.dashboard);
-    } on FirebaseAuthException catch (e) {
-      handleAuthErrors(e);
     } catch (e) {
-      errorMessage(e.toString()); // Set error message
-      Get.snackbar("Login Failed", e.toString(),
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar("Error", e.toString());
     } finally {
-      isLoading(false); // Stop loading
+      isLoading(false);
     }
   }
   Future<void> logout() async {
     try {
-      await _auth.signOut(); // Sign out the user
-      isLoggedOut(true); // Update the reactive variable
-      Get.offAllNamed(AppRoutes.login); // Navigate to the login screen
+      await _auth.signOut();
+      isLoggedOut(true);
+      Get.offAllNamed(AppRoutes.login);
     } catch (e) {
       Get.snackbar("Error", "Failed to log out: ${e.toString()}");
     }
-  
-}
-  /// **Handle Firebase Authentication Errors**
-  void handleAuthErrors(FirebaseAuthException e) {
-    String message = "An error occurred. Please try again.";
-
-    switch (e.code) {
-      case 'email-already-in-use':
-        message = "This email is already registered. Try logging in.";
-        break;
-      case 'invalid-email':
-        message = "Invalid email format. Please check and try again.";
-        break;
-      case 'weak-password':
-        message = "Password is too weak. Please use a stronger password.";
-        break;
-      case 'user-not-found':
-        message = "No user found with these credentials.";
-        break;
-      case 'wrong-password':
-        message = "Incorrect password. Please try again.";
-        break;
-      case 'too-many-requests':
-        message = "Too many login attempts. Try again later.";
-        break;
-    }
-
-    errorMessage(message); // Set error message
-    Get.snackbar("Error", message, snackPosition: SnackPosition.BOTTOM);
   }
+
+  // Step 3: Save User Data in Firestore
+  Future<void> saveUserData(String uid) async {
+  DocumentSnapshot userDoc = await _firestore.collection("users").doc(uid).get();
+
+  if (!userDoc.exists) { // Check if user data already exists
+    UserModel user = UserModel(
+      id: uid,
+      firstName: firstName.value,
+      lastName: lastName.value,
+      email: email.value,
+      phone: phoneNumber.value,
+      password: password.value, // Store password securely (hash it if possible)
+    );
+
+    await _firestore.collection("users").doc(uid).set(user.toMap());
+  }
+}
+
 }
