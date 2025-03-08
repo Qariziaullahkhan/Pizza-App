@@ -67,14 +67,14 @@ class LoginView extends StatelessWidget {
                   fillColor: Colors.white, // Custom background color
                   textColor: Colors.black, // Custom text color
                 ),
-                // MySize(height: responsive.height(0.02)),
-                // // Password Field
-                // MyText(
-                //   text: "Password",
-                //   fontSize: 12,
-                //   fontWeight: FontWeight.w500,
-                //   color: AppColors.grey,
-                // ),
+                MySize(height: responsive.height(0.02)),
+                // Password Field
+                MyText(
+                  text: "Password",
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.grey,
+                ),
                 // MyPasswordField(
                 //   controller: passwordController,
                 //   isPassword: true,
